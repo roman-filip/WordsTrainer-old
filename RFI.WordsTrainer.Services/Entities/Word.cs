@@ -1,15 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Xml.Serialization;
 
 namespace RFI.WordsTrainer.Services.Entities
 {
-    [XmlType("word")]
-    public partial class Word
+    public class Word
     {
-        [XmlElement("original")]
-        public string original { get; set; }
+        public string Original { get; set; }
 
-        /// <remarks/>
-        //public List<string> translations { get; set; }
+        public List<string> Translations { get; set; }
     }
 }
