@@ -8,22 +8,38 @@ namespace RFI.WordsTrainer.Services.Services.Impl.FileWords
 {
     public class FileWordsService : IWordsService
     {
+        public string FilePath { get; set; }
+
+        public FileWordsService(string filePath)
+        {
+            FilePath = filePath;
+        }
+
         public List<WordsTrainer.Services.Entities.Word> GetAllWords()
         {
             var serializer = new XmlSerializer(typeof(WordsCollection));
-            using (Stream reader =
-                new FileStream(@"C:\_GitHub\WordsTrainer\RFI.WordsTrainer.Services\Words\EN_seznam_words.xml",
-                    FileMode.Open))
+            using (Stream reader = new FileStream(FilePath, FileMode.Open))
             {
-                var words = (WordsCollection)serializer.Deserialize(reader);
+                var wordsFromFile = (WordsCollection)serializer.Deserialize(reader);
+                return ConvertWords(wordsFromFile);
             }
-
-            return new List<WordsTrainer.Services.Entities.Word>();
         }
 
         public void AddWord(WordsTrainer.Services.Entities.Word word)
         {
             throw new NotImplementedException();
+        }
+
+        private static List<WordsTrainer.Services.Entities.Word> ConvertWords(WordsCollection wordsFromFile)
+        {
+            // TODO - use AutoMapper
+            var words = new List<WordsTrainer.Services.Entities.Word>();
+            wordsFromFile.Words.ForEach(w => words.Add(new WordsTrainer.Services.Entities.Word
+            {
+                Original = w.Original,
+                Translations = new List<string>(w.Translations)
+            }));
+            return words;
         }
     }
 }
