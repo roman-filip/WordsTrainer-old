@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RFI.WordsTrainer.Services.Services;
 using RFI.WordsTrainer.Services.Services.Impl.FileWords;
 
@@ -14,6 +15,14 @@ namespace RFI.WordsTrainer.Services.Tests
             var words = wordsService.GetAllWords();
 
             Assert.IsNotNull(words);
+        }
+
+        [TestMethod]
+        public void AddWordTest()
+        {
+            IWordsService wordsService = new FileWordsService();
+
+            Assert.ThrowsException<NotImplementedException>(() => wordsService.AddWord(null));
         }
     }
 }

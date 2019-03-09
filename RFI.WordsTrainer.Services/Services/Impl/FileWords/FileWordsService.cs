@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
 using RFI.WordsTrainer.Services.Services.Impl.FileWords.Entities;
@@ -22,7 +23,7 @@ namespace RFI.WordsTrainer.Services.Services.Impl.FileWords
 
         public void AddWord(WordsTrainer.Services.Entities.Word word)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
