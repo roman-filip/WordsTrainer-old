@@ -5,7 +5,9 @@ namespace RFI.WordsTrainer.Services.Services
 {
     public interface IWordsService
     {
+        List<WordSet> GetAllWordsSets();
         List<Word> GetAllWords();
-        void AddWord(Word word);
+        List<Word> GetWordsFromSet(WordSet wordSet);
+        void AddWord(WordSet wordSet, Word word);
     }
 }

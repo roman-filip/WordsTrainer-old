@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <None Remove="TestData\EN_seznam_words.xml" />
+    <None Remove="TestData\EN_seznam_words2.xml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="TestData\EN_seznam_words2.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\EN_seznam_words.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
