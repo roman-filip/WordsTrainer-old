@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RFI.WordsTrainer.Services.Exceptions;
 using RFI.WordsTrainer.Services.Services;
 using RFI.WordsTrainer.Services.Services.Impl.FileWords;
 
@@ -9,6 +10,23 @@ namespace RFI.WordsTrainer.Services.Tests
     public class FileWordsServiceTest
     {
         private readonly IWordsService _wordsService = new FileWordsService(@".\TestData");
+
+        [TestMethod]
+        public void GetAllWordsSetsTest_NotExistingDir()
+        {
+            IWordsService wordsService = new FileWordsService(@".\NonExistingDir");
+            Assert.ThrowsException<WordsRepositoryNotAvailableException>(() => wordsService.GetAllWordsSets());
+        }
+
+        [TestMethod]
+        public void GetAllWordsSetsTest_EmptyDir()
+        {
+            IWordsService wordsService = new FileWordsService(@".\TestData\EmptyDir");
+            var wordSets = wordsService.GetAllWordsSets();
+
+            Assert.IsNotNull(wordSets);
+            Assert.AreEqual(0, wordSets.Count);
+        }
 
         [TestMethod]
         public void GetAllWordsSetsTest()
@@ -45,9 +63,15 @@ namespace RFI.WordsTrainer.Services.Tests
         }
 
         [TestMethod]
-        public void GetWordsFromSetTest()
+        public void GetWordsFromSetTest_EmptySet()
         {
-            Assert.ThrowsException<NotImplementedException>(() => _wordsService.GetWordsFromSet(null));
+            Assert.ThrowsException<InvalidWordsSetException>(() => _wordsService.GetWordsFromSet(null));
+        }
+
+        [TestMethod]
+        public void GetWordsFromSetTest_NonExistingSet()
+        {
+            Assert.ThrowsException<InvalidWordsSetException>(() => _wordsService.GetWordsFromSet(new WordSet { Name = "NON_EXISTING_SET" }));
         }
 
         [TestMethod]

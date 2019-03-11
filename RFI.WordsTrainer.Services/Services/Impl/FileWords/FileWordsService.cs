@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
+using RFI.WordsTrainer.Services.Exceptions;
 using RFI.WordsTrainer.Services.Services.Impl.FileWords.Entities;
 using Word = RFI.WordsTrainer.Services.Entities.Word;
 
@@ -19,7 +20,12 @@ namespace RFI.WordsTrainer.Services.Services.Impl.FileWords
 
         public List<WordSet> GetAllWordsSets()
         {
-            var files = Directory.GetFiles(_wordsFilesDirectory);
+            if (!Directory.Exists(_wordsFilesDirectory))
+            {
+                throw new WordsRepositoryNotAvailableException($"Directory '{_wordsFilesDirectory}' doesn't exist.");
+            }
+
+            var files = Directory.GetFiles(_wordsFilesDirectory, "*.xml");
             var wordSets = files
                 .OrderBy(f => f)
                 .Select(f => new WordSet { Name = Path.GetFileNameWithoutExtension(f) })
@@ -41,6 +47,17 @@ namespace RFI.WordsTrainer.Services.Services.Impl.FileWords
 
         public List<Word> GetWordsFromSet(WordSet wordSet)
         {
+            if (string.IsNullOrEmpty(wordSet?.Name))
+            {
+                throw new InvalidWordsSetException("WordSet name is not specified.");
+            }
+
+            var filePath = Path.Combine(_wordsFilesDirectory, wordSet.Name + ".xml");
+            if (!File.Exists(filePath))
+            {
+                throw new InvalidWordsSetException($"WordSet '{filePath}' doesn't exist.");
+            }
+
             throw new NotImplementedException();
         }
 
