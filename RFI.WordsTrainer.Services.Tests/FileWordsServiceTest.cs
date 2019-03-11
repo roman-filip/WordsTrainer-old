@@ -63,15 +63,36 @@ namespace RFI.WordsTrainer.Services.Tests
         }
 
         [TestMethod]
-        public void GetWordsFromSetTest_EmptySet()
+        public void GetWordsFromSetTest_EmptySetName()
         {
             Assert.ThrowsException<InvalidWordsSetException>(() => _wordsService.GetWordsFromSet(null));
+            Assert.ThrowsException<InvalidWordsSetException>(() => _wordsService.GetWordsFromSet(new WordSet()));
+            Assert.ThrowsException<InvalidWordsSetException>(() => _wordsService.GetWordsFromSet(new WordSet { Name = string.Empty }));
         }
 
         [TestMethod]
         public void GetWordsFromSetTest_NonExistingSet()
         {
             Assert.ThrowsException<InvalidWordsSetException>(() => _wordsService.GetWordsFromSet(new WordSet { Name = "NON_EXISTING_SET" }));
+        }
+
+        [TestMethod]
+        public void GetWordsFromSetTest()
+        {
+            var words = _wordsService.GetWordsFromSet(new WordSet { Name = "EN_seznam_words" });
+
+            Assert.IsNotNull(words);
+            Assert.AreEqual(2, words.Count);
+
+            Assert.AreEqual("abandoned", words[0].Original);
+            Assert.AreEqual(3, words[0].Translations.Count);
+            Assert.AreEqual("opuštěný", words[0].Translations[0]);
+            Assert.AreEqual("prázdný", words[0].Translations[1]);
+            Assert.AreEqual("nepoužívaný", words[0].Translations[2]);
+
+            Assert.AreEqual("abs", words[1].Original);
+            Assert.AreEqual(1, words[1].Translations.Count);
+            Assert.AreEqual("břišní svaly", words[1].Translations[0]);
         }
 
         [TestMethod]

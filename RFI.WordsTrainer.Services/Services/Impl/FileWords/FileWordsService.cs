@@ -58,7 +58,7 @@ namespace RFI.WordsTrainer.Services.Services.Impl.FileWords
                 throw new InvalidWordsSetException($"WordSet '{filePath}' doesn't exist.");
             }
 
-            throw new NotImplementedException();
+            return GetWordsFromFile(filePath);
         }
 
         public void AddWord(WordSet wordSet, Word word)
