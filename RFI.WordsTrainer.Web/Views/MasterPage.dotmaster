@@ -1,6 +1,5 @@
 ﻿@viewModel RFI.WordsTrainer.Web.ViewModels.MasterPageViewModel, RFI.WordsTrainer.Web
 <!DOCTYPE html>
-
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
@@ -8,10 +7,6 @@
     <dot:RequiredResource Name="bootstrap" />
 </head>
 <body>
-
- 	
-
-	<dot:ContentPlaceHolder ID="MainContent" />
-
+    <dot:ContentPlaceHolder ID="MainContent" />
 </body>
 </html>
