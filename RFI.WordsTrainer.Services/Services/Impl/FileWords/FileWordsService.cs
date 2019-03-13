@@ -61,6 +61,11 @@ namespace RFI.WordsTrainer.Services.Services.Impl.FileWords
             return GetWordsFromFile(filePath);
         }
 
+        public void AddWordsSet(WordSet wordSet)
+        {
+            throw new NotImplementedException();
+        }
+
         public void AddWord(WordSet wordSet, Word word)
         {
             throw new NotImplementedException();

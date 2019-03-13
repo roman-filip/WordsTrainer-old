@@ -96,6 +96,12 @@ namespace RFI.WordsTrainer.Services.Tests
         }
 
         [TestMethod]
+        public void AddWordsSetTest()
+        {
+            Assert.ThrowsException<NotImplementedException>(() => _wordsService.AddWordsSet(new WordSet()));
+        }
+
+        [TestMethod]
         public void AddWordTest()
         {
             Assert.ThrowsException<NotImplementedException>(() => _wordsService.AddWord(null, null));

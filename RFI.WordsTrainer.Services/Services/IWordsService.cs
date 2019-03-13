@@ -8,6 +8,7 @@ namespace RFI.WordsTrainer.Services.Services
         List<WordSet> GetAllWordsSets();
         List<Word> GetAllWords();
         List<Word> GetWordsFromSet(WordSet wordSet);
+        void AddWordsSet(WordSet wordSet);
         void AddWord(WordSet wordSet, Word word);
     }
 }
