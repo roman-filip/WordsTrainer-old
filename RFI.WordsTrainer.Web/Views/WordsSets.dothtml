@@ -2,5 +2,19 @@
 @masterPage Views/MasterPage.dotmaster
 
 <dot:Content ContentPlaceHolderID="MainContent">
-    <h1>{{value: Title}}</h1>
+    <div class="container">
+        <h1>{{value: Title}}</h1>
+
+        <form>
+            <div class="form-group row align-items-center">
+                <label class="col-sm-2 col-form-label" for="wordsSets">Words Set</label>
+                <div class="col-sm-10">
+                    <dot:ComboBox class="form-control" ID="wordsSets"
+                                  DataSource="{value: WordsSets}" DisplayMember="Name" SelectedValue="{value: SelectedWordsSet}" />
+                </div>
+            </div>
+
+            <dot:Button class="btn btn-primary" type="submit" ButtonTagName="button">Start Testing</dot:Button>
+        </form>
+    </div>
 </dot:Content>

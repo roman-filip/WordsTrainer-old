@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using DotVVM.Framework.Hosting;
+using RFI.WordsTrainer.Services.Services;
+using RFI.WordsTrainer.Services.Services.Impl.FileWords;
+using System.IO;
+using System.Reflection;
 
 namespace RFI.WordsTrainer.Web
 {
@@ -26,6 +30,11 @@ namespace RFI.WordsTrainer.Web
             services.AddDataProtection();
             services.AddAuthorization();
             services.AddWebEncoders();
+
+            // TODO - extract to extenstion method
+            var wordsFilesDirectory = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), @"Words");
+            services.AddTransient<IWordsService, FileWordsService>(sp => new FileWordsService(wordsFilesDirectory));
+
             services.AddDotVVM();
         }
 
@@ -35,7 +44,7 @@ namespace RFI.WordsTrainer.Web
             loggerFactory.AddConsole();
 
             var dotvvmConfiguration = app.UseDotVVM<DotvvmStartup>(env.ContentRootPath);
-            
+
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(env.WebRootPath)
