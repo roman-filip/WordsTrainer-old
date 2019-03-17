@@ -8,5 +8,6 @@ namespace RFI.WordsTrainer.Web.ViewModels
 {
     public class MasterPageViewModel : DotvvmViewModelBase
     {
+        public string Title => "Words Trainer";
     }
 }

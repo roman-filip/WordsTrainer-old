@@ -9,6 +9,7 @@
     <title>Words Trainer</title>
 </head>
 <body>
+    <h1>{{value: Title}}</h1>
     <dot:ContentPlaceHolder ID="MainContent" />
 </body>
 </html>

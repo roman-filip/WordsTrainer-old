@@ -1,0 +1,8 @@
+﻿@viewModel RFI.WordsTrainer.Web.ViewModels.WordsTestingViewModel, RFI.WordsTrainer.Web
+@masterPage Views/MasterPage.dotmaster
+
+<dot:Content ContentPlaceHolderID="MainContent">
+    <div class="container">
+        WordsSet = {{value: WordsSet}}
+    </div>
+</dot:Content>

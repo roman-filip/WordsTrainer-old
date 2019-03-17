@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using DotVVM.Framework.ViewModel;
 using RFI.WordsTrainer.Services.Services;
+using RFI.WordsTrainer.Web.Views;
+using RFI.WordsTrainer.Web.Views.Constants;
 
 namespace RFI.WordsTrainer.Web.ViewModels
 {
@@ -12,16 +14,12 @@ namespace RFI.WordsTrainer.Web.ViewModels
     {
         private readonly IWordsService _wordsService;
 
-        public string Title { get; set; }
-
         public List<WordSet> WordsSets { get; set; }
 
         public WordSet SelectedWordsSet { get; set; }
 
         public WordsSetsViewModel(IWordsService wordsService)
         {
-            Title = "Words trainer";
-
             _wordsService = wordsService;
         }
 
@@ -30,6 +28,13 @@ namespace RFI.WordsTrainer.Web.ViewModels
             await base.Load();
 
             WordsSets = new List<WordSet>(_wordsService.GetAllWordsSets());
+            //SelectedWordsSet = WordsSets.FirstOrDefault();
+        }
+
+        public void StartTesting()
+        {
+            Context.RedirectToRoute(ViewNames.WordsTesting,
+                query: new Dictionary<string, string> { { QueryParameterNames.WordsSet, SelectedWordsSet?.Name ?? string.Empty } });
         }
     }
 }
