@@ -4,5 +4,28 @@
 <dot:Content ContentPlaceHolderID="MainContent">
     <div class="container">
         WordsSet = {{value: WordsSet}}
+
+        <form>
+            <div class="form-group row align-items-center">
+                <label class="col-sm-2 col-form-label" for="wordOriginal">Word</label>
+                <div class="col-sm-6">
+                    <dot:TextBox class="form-control" Text="{value: RandomWord.Original}" readonly ID="wordOriginal" />
+                </div>
+                <dot:Button class="btn btn-primary col-sm-2" type="submit" ButtonTagName="button">Translate</dot:Button>
+            </div>
+
+            <dot:Repeater DataSource="{value: RandomWord.Translations}">
+                <ItemTemplate>
+                    <div class="form-group row align-items-center">
+                        <div class="col-sm-2">
+                            <label class="col-form-label" Visible="{value: _collection.Index == 0}" for="wordTranslation">Translation(s)</label>
+                        </div>
+                        <div class="col-sm-6">
+                            <dot:TextBox class="form-control" Text="{value: _this}" readonly ID="wordTranslation" />
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </dot:Repeater>
+        </form>
     </div>
 </dot:Content>

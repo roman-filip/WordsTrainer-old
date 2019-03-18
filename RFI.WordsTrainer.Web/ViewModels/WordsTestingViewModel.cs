@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using DotVVM.Framework.ViewModel;
+using RFI.WordsTrainer.Services.Entities;
 using RFI.WordsTrainer.Services.Services;
-using RFI.WordsTrainer.Web.Views;
 using RFI.WordsTrainer.Web.Views.Constants;
 
 namespace RFI.WordsTrainer.Web.ViewModels
@@ -17,14 +14,21 @@ namespace RFI.WordsTrainer.Web.ViewModels
         [FromQuery(QueryParameterNames.WordsSet)]
         public string WordsSet { get; set; }
 
+        public Word RandomWord { get; set; }
+
         public WordsTestingViewModel(IWordsService wordsService)
         {
             _wordsService = wordsService;
         }
 
-        public override Task Load()
+        public override async Task Load()
         {
-            return base.Load();
+            await base.Load();
+
+            var words = _wordsService.GetWordsFromSet(new WordSet { Name = WordsSet });
+            var random = new Random();
+
+            RandomWord = words[random.Next(words.Count)];
         }
     }
 }
