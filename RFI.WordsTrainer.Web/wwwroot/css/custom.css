@@ -1,3 +1,9 @@
 ﻿.selector-for-some-widget {
     box-sizing: content-box;
 }
+
+.navbar-custom {
+    text-align: center;
+    background-color: #007ACC;
+    color: white;
+}
