@@ -11,7 +11,8 @@
                 <div class="col-sm-6">
                     <dot:TextBox class="form-control" Text="{value: RandomWord.Original}" readonly ID="wordOriginal" />
                 </div>
-                <dot:Button class="btn btn-primary col-sm-2" type="submit" ButtonTagName="button" Click="{command: ShowTranslations()}">Translate</dot:Button>
+                <dot:Button class="btn btn-primary col-sm-2" type="submit" ButtonTagName="button" Visible="{value: !TranslationsVisible}" Click="{command: ShowTranslations()}">Translate</dot:Button>
+                <dot:Button class="btn btn-primary col-sm-2" type="submit" ButtonTagName="button" Visible="{value: TranslationsVisible}" Click="{command: ShowNextWord()}">Next Word</dot:Button>
             </div>
 
             <dot:Repeater DataSource="{value: RandomWord.Translations}" Visible="{value: TranslationsVisible}">
