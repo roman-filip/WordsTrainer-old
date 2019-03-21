@@ -16,6 +16,9 @@ namespace RFI.WordsTrainer.Web.ViewModels
 
         public Word RandomWord { get; set; }
 
+        [Bind(Direction.ServerToClient)] // This property cannot be changed by the user, it is only set on the server side. There is no need to transfer it from the client to the server.
+        public bool TranslationsVisible { get; set; }
+
         public WordsTestingViewModel(IWordsService wordsService)
         {
             _wordsService = wordsService;
@@ -25,10 +28,18 @@ namespace RFI.WordsTrainer.Web.ViewModels
         {
             await base.Load();
 
-            var words = _wordsService.GetWordsFromSet(new WordSet { Name = WordsSet });
-            var random = new Random();
+            if (RandomWord == null)
+            {
+                var words = _wordsService.GetWordsFromSet(new WordSet { Name = WordsSet });
+                var random = new Random();
 
-            RandomWord = words[random.Next(words.Count)];
+                RandomWord = words[random.Next(words.Count)];
+            }
+        }
+
+        public void ShowTranslations()
+        {
+            TranslationsVisible = true;
         }
     }
 }
