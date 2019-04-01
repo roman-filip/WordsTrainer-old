@@ -3,9 +3,14 @@
 
 <dot:Content ContentPlaceHolderID="MainContent">
     <div class="container">
-        WordsSet = {{value: WordsSet}}
-
         <form>
+            <div class="form-group row align-items-center">
+                <label class="col-sm-2 col-form-label" for="wordsSet">Words Set</label>
+                <div class="col-sm-6">
+                    <dot:TextBox class="form-control" Text="{value: WordsSet}" readonly ID="wordsSet" />
+                </div>
+            </div>
+
             <div class="form-group row align-items-center">
                 <label class="col-sm-2 col-form-label" for="wordOriginal">Word</label>
                 <div class="col-sm-6">
