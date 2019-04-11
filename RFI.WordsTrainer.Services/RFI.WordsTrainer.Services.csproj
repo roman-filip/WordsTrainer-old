@@ -5,11 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Words\EN_HC_idioms.xml" />
     <None Remove="Words\EN_HC_words.xml" />
     <None Remove="Words\EN_seznam_words.xml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Words\EN_HC_idioms.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Words\EN_HC_words.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

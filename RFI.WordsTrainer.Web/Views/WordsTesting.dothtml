@@ -27,7 +27,7 @@
                             <label class="col-form-label" Visible="{value: _collection.Index == 0}" for="wordTranslation">Translation(s)</label>
                         </div>
                         <div class="col-sm-6">
-                            <dot:TextBox class="form-control" Text="{value: _this}" readonly ID="wordTranslation" />
+                            <dot:TextBox class="form-control" Text="{value: _this}" Type="MultiLine" readonly ID="wordTranslation" />
                         </div>
                     </div>
                 </ItemTemplate>
